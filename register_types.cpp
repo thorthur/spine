@@ -68,8 +68,8 @@ char* _spUtil_readFile(const char* p_path, int* p_length) {
 
 	*p_length = f->get_len();
 
-	char *data = (char *)_malloc(*p_length, __FILE__, __LINE__);
-	data = (char *)_malloc(*p_length, __FILE__, __LINE__);
+	char *data = (char *)_spMalloc(*p_length, __FILE__, __LINE__);
+	data = (char *)_spMalloc(*p_length, __FILE__, __LINE__);
 	ERR_FAIL_COND_V(data == NULL, NULL);
 
 	f->get_buffer((uint8_t *)data, *p_length);
@@ -228,8 +228,8 @@ void register_spine_types() {
 	resource_loader_spine = memnew( ResourceFormatLoaderSpine );
 	ResourceLoader::add_resource_format_loader(resource_loader_spine);
 
-	_setMalloc(spine_malloc);
-	_setFree(spine_free);
+	_spSetMalloc(spine_malloc);
+	_spSetFree(spine_free);
 }
 
 void unregister_spine_types() {
