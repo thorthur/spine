@@ -156,6 +156,13 @@ static void *spine_malloc(size_t p_size) {
 	return memalloc(p_size);
 }
 
+static void *spine_realloc(void *ptr, size_t p_size) {
+
+	if (p_size == 0)
+		return NULL;
+	return memrealloc(ptr, p_size);
+}
+
 static void spine_free(void *ptr) {
 
 	if (ptr == NULL)
@@ -229,6 +236,7 @@ void register_spine_types() {
 	ResourceLoader::add_resource_format_loader(resource_loader_spine);
 
 	_spSetMalloc(spine_malloc);
+	_spSetRealloc(spine_realloc);
 	_spSetFree(spine_free);
 }
 
